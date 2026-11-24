@@ -20,3 +20,5 @@ jobs:
       - name: Verify both manifest signatures and publish the exact SPK
         shell: bash
         run: bash .github/publish-verified-spk.sh
+      - name: Check DSM update feed from the previously installed package
+        run: bash .github/verify-installed-045.sh
