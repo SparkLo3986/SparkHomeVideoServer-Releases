@@ -20,3 +20,5 @@ jobs:
       - name: Verify both manifest signatures and publish the exact SPK
         shell: bash
         run: bash .github/publish-verified-spk.sh
+      - name: Check the 0.4.7 update feed from the installed 0.4.6 package
+        run: bash .github/verify-installed-046.sh
