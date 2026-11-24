@@ -20,3 +20,5 @@ jobs:
       - name: Verify both manifest signatures and publish the exact SPK
         shell: bash
         run: bash .github/publish-verified-spk.sh
+      - name: Test Package Center catalog against the live release
+        run: bash .github/smoke-dsm-source.sh
