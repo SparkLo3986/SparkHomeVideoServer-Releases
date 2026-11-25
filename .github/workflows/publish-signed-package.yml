@@ -1,0 +1,24 @@
+name: Publish a verified Spark NAS package
+on:
+  push:
+    branches: ['publish-spk-*']
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    concurrency: spark-spk-publication
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify both manifest signatures and publish the exact SPK
+        shell: bash
+        run: bash .github/publish-verified-spk.sh
+      - name: Check the 0.4.9 update feed from the installed 0.4.8 package
+        run: bash .github/verify-installed-048.sh
