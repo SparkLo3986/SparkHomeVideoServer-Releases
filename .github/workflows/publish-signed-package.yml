@@ -1,0 +1,22 @@
+name: Publish the verified Spark DSM update source
+on:
+  push:
+    branches: ['publish-spk-source-*']
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    concurrency: spark-spk-publication
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify both manifest signatures and publish the exact SPK
+        shell: bash
+        run: bash .github/publish-verified-spk.sh
